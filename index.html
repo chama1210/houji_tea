@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品ページ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            background-color: #ff9900;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>出品アイテムリスト一覧</h1>
+        <p>★出品ｶﾞﾁｬ等の一覧です。画像をクリックし、商品ページに移動してください★</p>
+    </div>
+
+    <div class="container">
+        <a href="https://pokecolot.gamewiki.jp/230824f/">
+            <img class="product-image" src="product_image.jpg" alt="商品">
+        </a>
+    </div>
+</body>
+</html>
