@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品検索結果</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            background-color: #ff9900;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .product {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            width: calc(33.33% - 40px);
+            max-width: 300px;
+            transition: transform 0.2s ease-in-out;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+        }
+        select {
+            margin-top: 10px;
+            padding: 5px;
+            width: 100%;
+        }
+        .product-name {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: #333;
+        }
+        #result {
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        @media screen and (max-width: 900px) {
+            .product {
+                width: calc(50% - 40px);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .product {
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>出品アイテムリスト一覧</h1>
+        <p>★欲しいアイテムと個数を選択し、合計画面に出力された結果をGameTradeにてご連絡ください。★</p>
+    </div>
+
+    <div class="container">
+        <a href="https://pokecolot.gamewiki.jp/230824f/">
+            <img class="product-image" src="product_image.jpg" alt="商品">
+        </a>
+        </div>
+
+        <div class="nav-link">
+            <a href="https://example.com/other-page">他のページに移動</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="product">
+            <img src="product1.jpg" alt="商品1">
+            <p class="product-name">商品名1</p>
+            <p class="price">価格: ¥5,000</p>
+            <select class="quantity">
+                <option value="0">0個</option>
+                <option value="1">1個</option>
+                <option value="2">2個</option>
+                <option value="3">3個</option>
+                <option value="4">4個</option>
+                <option value="5">5個</option>
+            </select>
+        </div>
+
+        <div class="product">
+            <img src="product2.jpg" alt="商品2">
+            <p class="product-name">商品名2</p>
+            <p class="price">価格: ¥8,000</p>
+            <select class="quantity">
+                <option value="0">0個</option>
+                <option value="1">1個</option>
+                <option value="2">2個</option>
+                <option value="3">3個</option>
+                <option value="4">4個</option>
+                <option value="5">5個</option>
+            </select>
+        </div>
+
+        <!-- 他の商品も同様に追加 -->
+
+    </div>
+
+    <div id="result">
+        <div style="margin-bottom: 20px;">
+            <h2>選択した商品と金額の合計</h2>
+            <ul id="selected-items">
+            </ul>
+        </div>
+        <p id="total">合計: ¥0</p>
+    </div>
+
+    <script>
+        const quantitySelectors = document.querySelectorAll('.quantity');
+        const priceElements = document.querySelectorAll('.price');
+        const productNames = document.querySelectorAll('.product-name');
+        const selectedItemsList = document.getElementById('selected-items');
+        const totalElement = document.getElementById('total');
+
+        quantitySelectors.forEach((selector, index) => {
+            selector.addEventListener('change', () => {
+                updateTotal();
+            });
+        });
+
+        function updateTotal() {
+            let totalPrice = 0;
+            selectedItemsList.innerHTML = '';
+
+            quantitySelectors.forEach((selector, index) => {
+                const pricePerItem = parseFloat(priceElements[index].textContent.replace('価格: ¥', '').replace(',', ''));
+                const quantity = parseInt(selector.value);
+                const itemName = productNames[index].textContent;
+                const itemTotalPrice = pricePerItem * quantity;
+                totalPrice += itemTotalPrice;
+                if (quantity > 0) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${itemName} × ${quantity}個: ¥${itemTotalPrice.toLocaleString()}`;
+                    selectedItemsList.appendChild(listItem);
+                }
+            });
+
+            totalElement.textContent = `合計: ¥${totalPrice.toLocaleString()}`;
+        }
+    </script>
+</body>
+</html>
